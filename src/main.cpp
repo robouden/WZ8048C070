@@ -159,28 +159,28 @@ void label_xy()
 }
 
 
-//进度条控件
-void lv_example_bar(void)
-{
-  //////////////////////////////
-  bar = lv_bar_create(ui_MENU);
-  lv_bar_set_value(bar, 0, LV_ANIM_OFF);
-  lv_obj_set_width(bar, 480);
-  lv_obj_set_height(bar, 25);
-  lv_obj_set_x(bar, 0);
-  lv_obj_set_y(bar, 175);
-  lv_obj_set_align(bar, LV_ALIGN_CENTER);
-  lv_obj_set_style_bg_img_src(bar, &ui_img_bar_800_01_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+// //进度条控件
+// void lv_example_bar(void)
+// {
+//   //////////////////////////////
+//   bar = lv_bar_create(ui_MENU);
+//   lv_bar_set_value(bar, 0, LV_ANIM_OFF);
+//   lv_obj_set_width(bar, 480);
+//   lv_obj_set_height(bar, 25);
+//   lv_obj_set_x(bar, 0);
+//   lv_obj_set_y(bar, 175);
+//   lv_obj_set_align(bar, LV_ALIGN_CENTER);
+//   lv_obj_set_style_bg_img_src(bar, &ui_img_bar_800_01_png, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  lv_obj_set_style_bg_img_src(bar, &ui_img_bar_800_02_png, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-  lv_obj_set_style_outline_color(bar, lv_color_hex(0x2D8812), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-  lv_obj_set_style_outline_opa(bar, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-  //////////////////////
-  ui_Labe2 = lv_label_create(bar);//创建标签
-  lv_obj_set_style_text_color(ui_Labe2, lv_color_hex(0x09BEFB), LV_STATE_DEFAULT);
-  lv_label_set_text(ui_Labe2, "0%");
-  lv_obj_center(ui_Labe2);
-}
+//   lv_obj_set_style_bg_img_src(bar, &ui_img_bar_800_02_png, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+//   lv_obj_set_style_outline_color(bar, lv_color_hex(0x2D8812), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+//   lv_obj_set_style_outline_opa(bar, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+//   //////////////////////
+//   ui_Labe2 = lv_label_create(bar);//创建标签
+//   lv_obj_set_style_text_color(ui_Labe2, lv_color_hex(0x09BEFB), LV_STATE_DEFAULT);
+//   lv_label_set_text(ui_Labe2, "0%");
+//   lv_obj_center(ui_Labe2);
+// }
 
 #define Z_THRESHOLD 350 // Touch pressure threshold for validating touches
 #define _RAWERR 20 // Deadband error allowed in successive position samples
@@ -445,77 +445,77 @@ void setup() {
   ui_init();//开机UI界面
   while (1)
   {
-    if (goto_widget_flag == 1)//进入widget
-    {
-      if (ticker1.active() == true)
-      {
-        ticker1.detach();
-      }
-      goto_widget_flag = 0;
-      delay(300);
-      break;
-    }
+    // if (goto_widget_flag == 1)//进入widget
+    // {
+    //   if (ticker1.active() == true)
+    //   {
+    //     ticker1.detach();
+    //   }
+    //   goto_widget_flag = 0;
+    //   delay(300);
+    //   break;
+    // }
 
-    if (goto_widget_flag == 3)//进入触摸界面，先把进度条线程关闭
-    {
-      bar_flag = 0; //停止进度条标志
-      if (ticker1.active() == true)
-      {
-        ticker1.detach();
-      }
-      if (first_flag == 0 || first_flag == 1)
-      {
-        label_xy();
-        first_flag = 2;
-      }
-      if (zero_clean == 1)
-      {
-        touch_last_x = 0;
-        touch_last_y = 0;
-        zero_clean = 0;
-      }
-      lv_label_set_text(ui_Label, "Touch Adjust:");
-      lv_label_set_text_fmt(ui_Label3, "%d  %d", touch_last_x, touch_last_y); //显示触摸信息
-    }
+    // if (goto_widget_flag == 3)//进入触摸界面，先把进度条线程关闭
+    // {
+    //   bar_flag = 0; //停止进度条标志
+    //   if (ticker1.active() == true)
+    //   {
+    //     ticker1.detach();
+    //   }
+    //   if (first_flag == 0 || first_flag == 1)
+    //   {
+    //     label_xy();
+    //     first_flag = 2;
+    //   }
+    //   if (zero_clean == 1)
+    //   {
+    //     touch_last_x = 0;
+    //     touch_last_y = 0;
+    //     zero_clean = 0;
+    //   }
+    //   lv_label_set_text(ui_Label, "Touch Adjust:");
+    //   lv_label_set_text_fmt(ui_Label3, "%d  %d", touch_last_x, touch_last_y); //显示触摸信息
+    // }
 
-    if (goto_widget_flag == 4)//触摸界面返回到Menu界面,使进度条清零重启
-    {
-      val = 100;
-      delay(100);
-      ticker1.attach_ms(35, callback1);//每20ms调用callback1
-      goto_widget_flag = 0;
-    }
+    // if (goto_widget_flag == 4)//触摸界面返回到Menu界面,使进度条清零重启
+    // {
+    //   val = 100;
+    //   delay(100);
+    //   ticker1.attach_ms(35, callback1);//每20ms调用callback1
+    //   goto_widget_flag = 0;
+    // }
 
-    if (goto_widget_flag == 5) //触发校准信号
-    {
-      lv_scr_load_anim(ui_touch_calibrate, LV_SCR_LOAD_ANIM_NONE, 0, 0, false);
-      lv_timer_handler();
-      lv_timer_handler();
-      delay(100);
-      touch_calibrate();//触摸校准
-      lv_scr_load_anim(ui_TOUCH, LV_SCR_LOAD_ANIM_NONE, 0, 0, false);
-      lv_timer_handler();
-      goto_widget_flag = 3; //进入触摸界面标志
-      touch_last_x = 0;
-      touch_last_y = 0;
-    }
+    // if (goto_widget_flag == 5) //触发校准信号
+    // {
+    //   lv_scr_load_anim(ui_touch_calibrate, LV_SCR_LOAD_ANIM_NONE, 0, 0, false);
+    //   lv_timer_handler();
+    //   lv_timer_handler();
+    //   delay(100);
+    //   touch_calibrate();//触摸校准
+    //   lv_scr_load_anim(ui_TOUCH, LV_SCR_LOAD_ANIM_NONE, 0, 0, false);
+    //   lv_timer_handler();
+    //   goto_widget_flag = 3; //进入触摸界面标志
+    //   touch_last_x = 0;
+    //   touch_last_y = 0;
+    // }
 
-    if (bar_flag == 6)//刚开机进入Menu界面时运行进度条一次，之后就不再运行
-    {
-      if (first_flag == 0)
-      {
-        lv_example_bar();
-        ticker1.attach_ms(35, callback1);//每20ms调用callback1
-        first_flag = 1;
-      }
-    }
+    // if (bar_flag == 6)//刚开机进入Menu界面时运行进度条一次，之后就不再运行
+    // {
+    //   if (first_flag == 0)
+    //   {
+    //     lv_example_bar();
+    //     ticker1.attach_ms(35, callback1);//每20ms调用callback1
+    //     first_flag = 1;
+    //   }
+    // }
 
     lv_timer_handler();
   }
 
 
   lcd->fillScreen(BLACK);
-  lv_demo_widgets();//主UI界面
+  // lv_demo_widgets();//主UI界面
   Serial.println( "Setup done" );
 
 
